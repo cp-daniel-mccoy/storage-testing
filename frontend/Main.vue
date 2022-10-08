@@ -55,13 +55,13 @@ export default {
     async logMeIn() {
       const whitelist = [(this as any).canisterId];
       await (window as any).ic.plug.requestConnect({whitelist});
-      this.userInfo = await (window as any).ic.plug.agent.getPrincipal();
+      (this as any).userInfo = await (window as any).ic.plug.agent.getPrincipal();
     },
     async uploadFile() {
       const agent = await (window as any).ic.plug.agent;
 
       const assetManager = new AssetManager({
-        canisterId: this.canisterId,
+        canisterId: (this as any).canisterId,
         agent: agent
       });
 
@@ -72,7 +72,7 @@ export default {
     async uploadToSubdirectory() {
       const agent = (window as any).ic.plug.agent;
       const assetManager = new AssetManager({
-        canisterId: this.canisterId,
+        canisterId: (this as any).canisterId,
         agent: agent
       });
       const inputFile = (document.getElementById("uploadFileTwo") as any).files[0];
@@ -88,7 +88,7 @@ export default {
     async deleteFile() {
       const agent = await (window as any).ic.plug.agent;
       const assetManager = new AssetManager({
-        canisterId: this.canisterId,
+        canisterId: (this as any).canisterId,
         agent: agent
       });
       const fileToDelete = (document.getElementById("deletePath") as any).value;
@@ -96,13 +96,13 @@ export default {
     },
     async listFiles() {
       const agent = (window as any).ic.plug.agent;
-      const assetManager = new AssetManager({canisterId: this.canisterId, agent: agent});
+      const assetManager = new AssetManager({canisterId: (this as any).canisterId, agent: agent});
       const result = await assetManager.list();
       console.log(result);
     },
     async batchUpload() {
       const agent = (window as any).ic.plug.agent;
-      const assetManager = new AssetManager({canisterId: this.canisterId, agent: agent});
+      const assetManager = new AssetManager({canisterId: (this as any).canisterId, agent: agent});
       const StoreConfig = {
         path: '/batched',
       }
